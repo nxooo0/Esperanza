@@ -14,141 +14,102 @@ body{
   font-family:'Poppins',sans-serif;
   background:linear-gradient(180deg,#fde2e4,#fff);
   color:#4a2c2a;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
-section{
-  min-height:100vh;
-  padding:60px 20px;
+.screen{
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  animation:pageIn 1.5s ease forwards;
+  text-align:center;
+  padding:30px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
+}
+
+.screen.active{
+  opacity:1;
+  pointer-events:auto;
 }
 
 .container{
-  max-width:900px;
-  text-align:center;
+  max-width:850px;
 }
 
 h1,h2{
   font-family:'Playfair Display',serif;
 }
 
-.hero h1{
-  font-size:3rem;
-  margin-bottom:20px;
-}
+h1{font-size:3rem;margin-bottom:25px}
+h2{font-size:2.3rem;margin-bottom:25px}
 
-.hero p{
-  font-size:1.2rem;
-  line-height:1.8;
-}
-
-.separator{
-  width:120px;
-  height:2px;
-  background:#e5989b;
-  margin:40px auto;
-}
-
-.story p{
+p{
+  font-size:1.15rem;
+  line-height:2;
   margin-bottom:25px;
-  line-height:1.9;
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  margin-top:40px;
-}
-
-.gallery img{
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,.15);
-  transition:.4s;
-}
-
-.gallery img:hover{
-  transform:scale(1.05);
-}
-
-.question h2{
-  font-size:2.4rem;
-  margin-bottom:40px;
-}
-
-.buttons{
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  flex-wrap:wrap;
 }
 
 button{
-  padding:15px 40px;
+  padding:15px 45px;
   border:none;
   border-radius:40px;
-  font-size:1.2rem;
+  font-size:1.1rem;
   cursor:pointer;
   transition:.3s;
 }
 
-.yes{
+.next,.yes{
   background:linear-gradient(135deg,#ff758f,#ffb3c6);
   color:white;
-  box-shadow:0 10px 25px rgba(255,117,143,.5);
+  box-shadow:0 10px 25px rgba(255,117,143,.4);
 }
 
-.yes:hover{transform:scale(1.1)}
+.next:hover,.yes:hover{transform:scale(1.05)}
 
 .no{
   background:#ddd;
   color:#555;
 }
 
-.result{
-  display:none;
-  margin-top:40px;
-  animation:fadeIn 1.5s ease;
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:18px;
+  margin:35px 0;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,.18);
 }
 
 .confetti{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  inset:0;
   pointer-events:none;
-  z-index:999;
-}
-
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:20px;
-  color:rgba(255,117,143,.8);
-  animation:floatUp 8s linear infinite;
-}
-
-@keyframes floatUp{
-  to{transform:translateY(-110vh);opacity:0}
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-@keyframes pageIn{
-  to{opacity:1;transform:translateY(0)}
 }
 
 audio{display:none}
 
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  color:rgba(255,117,143,.8);
+  animation:float 8s linear infinite;
+}
+
+@keyframes float{
+  to{transform:translateY(-110vh);opacity:0}
+}
+
 @media(max-width:600px){
-  .hero h1{font-size:2.2rem}
-  .question h2{font-size:2rem}
+  h1{font-size:2.3rem}
+  h2{font-size:2rem}
 }
 </style>
 </head>
@@ -159,25 +120,69 @@ audio{display:none}
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
-<section class="hero">
+<!-- PANTALLA 1 -->
+<div class="screen active" id="s1">
   <div class="container">
-    <h1>Ignacio & Esperanza</h1>
-    <p>Hay personas que llegan sin hacer ruido…<br>y aun así lo cambian todo.</p>
+    <h1>Hola Esperanza 💖</h1>
+    <p>
+      Quería encontrar una forma especial de decirte algo.<br>
+      Algo que no se resume en palabras simples.<br><br>
+      Así que hice esto… solo para ti.
+    </p>
+    <button class="next" onclick="go(2)">Continuar</button>
   </div>
-</section>
+</div>
 
-<section class="story">
+<!-- PANTALLA 2 -->
+<div class="screen" id="s2">
   <div class="container">
-    <div class="separator"></div>
+    <h2>Desde hace tiempo…</h2>
+    <p>
+      Hay sentimientos que no llegan de golpe,<br>
+      llegan despacio,<br>
+      se instalan sin pedir permiso,<br>
+      y cuando te das cuenta… ya son parte de ti.
+    </p>
+    <button class="next" onclick="go(3)">Sigue leyendo</button>
+  </div>
+</div>
 
-    <p>Con el tiempo entendí que no eras solo alguien importante.  
-    Eras el lugar donde quiero quedarme.</p>
+<!-- PANTALLA 3 -->
+<div class="screen" id="s3">
+  <div class="container">
+    <h2>La verdad</h2>
+    <p>
+      La verdad es que me enamoré de ti.<br><br>
+      De tu risa,<br>
+      de tu forma de mirar la vida,<br>
+      de cómo haces sentir bien a quienes te rodean,<br>
+      y de cómo, sin darte cuenta,<br>
+      te volviste indispensable para mí.
+    </p>
+    <button class="next" onclick="go(4)">Quiero saber más</button>
+  </div>
+</div>
 
-    <p>Prometo elegirte incluso en los días cansados,  
-    cuidarte, escucharte y caminar contigo.</p>
+<!-- PANTALLA 4 -->
+<div class="screen" id="s4">
+  <div class="container">
+    <h2>Lo que siento por ti</h2>
+    <p>
+      Contigo entendí que el amor no es ruido,<br>
+      es calma.<br>
+      Es sentir que estás en el lugar correcto.<br><br>
+      Eres ese lugar donde quiero quedarme,<br>
+      donde quiero construir,
+      donde quiero volver siempre.
+    </p>
+    <button class="next" onclick="go(5)">Nuestros momentos</button>
+  </div>
+</div>
 
-    <p>No prometo perfección,  
-    prometo amor real.</p>
+<!-- PANTALLA 5 -->
+<div class="screen" id="s5">
+  <div class="container">
+    <h2>Momentos que guardo</h2>
 
     <div class="gallery">
       <img src="imagen1.jpg">
@@ -185,69 +190,90 @@ audio{display:none}
       <img src="imagen3.jpg">
       <img src="imagen4.jpg">
       <img src="imagen5.jpg">
-      <img src="imagen6.jpg">
     </div>
+
+    <p>
+      Cada recuerdo contigo<br>
+      confirma lo que siento.<br>
+      Y lo que quiero seguir construyendo.
+    </p>
+
+    <button class="next" onclick="go(6)">Promesas</button>
   </div>
-</section>
+</div>
 
-<section class="question" id="questionSection">
+<!-- PANTALLA 6 -->
+<div class="screen" id="s6">
   <div class="container">
-    <div class="separator"></div>
-    <h2>Esperanza Mejías… ¿quieres ser mi polola?</h2>
+    <h2>Lo que prometo</h2>
+    <p>
+      No te prometo perfección.<br>
+      Te prometo amor honesto.<br><br>
+      Elegirte incluso en los días cansados.<br>
+      Escucharte, cuidarte, apoyarte.<br>
+      Caminar a tu lado, siempre.
+    </p>
+    <button class="next" onclick="go(7)">Hay algo más</button>
+  </div>
+</div>
 
-    <div class="buttons">
+<!-- PANTALLA FINAL -->
+<div class="screen" id="s7">
+  <div class="container">
+    <h2>Esperanza Mejías…</h2>
+    <h2>¿Quieres ser mi polola?</h2>
+
+    <div style="margin-top:30px">
       <button class="yes" onclick="sayYes()">Sí 💖</button>
       <button class="no" id="noBtn" onclick="sayNo()">No</button>
     </div>
 
-    <div id="yesResult" class="result">
-      <h2>✨ Este es nuestro comienzo ✨</h2>
-      <p>Desde hoy, te elijo a ti.</p>
-    </div>
-
-    <div id="chapter" class="result">
+    <div id="yesResult" style="display:none;margin-top:40px">
       <h2>📖 Capítulo 1</h2>
       <p>
         Dos personas que se eligieron.<br>
-        Una historia que recién comienza.
+        Un amor que comienza con verdad.<br><br>
+        Y una historia que quiero escribir contigo.
       </p>
       <p><em>Ignacio & Esperanza 💖</em></p>
     </div>
 
-    <div id="noResult" class="result">
-      <h2>💔</h2>
-      <p>Igual siempre te voy a querer.</p>
+    <div id="noResult" style="display:none;margin-top:40px">
+      <p>
+        Igual gracias por todo lo que eres.<br>
+        Siempre te voy a querer.
+      </p>
     </div>
   </div>
-</section>
+</div>
 
 <canvas class="confetti" id="confetti"></canvas>
 
 <script>
-/* corazones */
+function go(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
+
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=Math.random()*20+15+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),8000);
-},600);
+},700);
 
-/* botón NO escapa */
 const noBtn=document.getElementById("noBtn");
 noBtn.addEventListener("mouseover",()=>{
   noBtn.style.position="fixed";
-  noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
-  noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
+  noBtn.style.left=Math.random()*(innerWidth-100)+"px";
+  noBtn.style.top=Math.random()*(innerHeight-50)+"px";
 });
 
-/* acciones */
 function sayYes(){
   document.getElementById("musica").play();
   document.getElementById("yesResult").style.display="block";
-  setTimeout(()=>document.getElementById("chapter").style.display="block",3000);
   launchConfetti();
 }
 
