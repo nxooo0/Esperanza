@@ -17,14 +17,14 @@ body{
   overflow:hidden;
 }
 
+/* ESCENAS */
 .screen{
   position:absolute;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:30px;
+  padding:60px 30px;
   opacity:0;
   pointer-events:none;
   transition:opacity 1.2s ease;
@@ -35,28 +35,35 @@ body{
   pointer-events:auto;
 }
 
+/* CONTENIDO */
 .container{
-  max-width:850px;
+  max-width:1100px;
+  width:100%;
+  text-align:center;
 }
 
 h1,h2{
   font-family:'Playfair Display',serif;
 }
 
-h1{font-size:3rem;margin-bottom:25px}
-h2{font-size:2.3rem;margin-bottom:25px}
+h1{font-size:3.2rem;margin-bottom:40px}
+h2{font-size:2.6rem;margin-bottom:35px}
 
 p{
-  font-size:1.15rem;
-  line-height:2;
-  margin-bottom:25px;
+  font-size:1.2rem;
+  line-height:2.1;
+  margin-bottom:35px;
+  max-width:900px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
+/* BOTONES */
 button{
-  padding:15px 45px;
+  padding:16px 46px;
   border:none;
-  border-radius:40px;
-  font-size:1.1rem;
+  border-radius:50px;
+  font-size:1.15rem;
   cursor:pointer;
   transition:.3s;
 }
@@ -64,185 +71,188 @@ button{
 .next,.yes{
   background:linear-gradient(135deg,#ff758f,#ffb3c6);
   color:white;
-  box-shadow:0 10px 25px rgba(255,117,143,.4);
+  box-shadow:0 12px 30px rgba(255,117,143,.45);
 }
 
-.next:hover,.yes:hover{transform:scale(1.05)}
+.next:hover,.yes:hover{
+  transform:scale(1.06);
+}
 
 .no{
-  background:#ddd;
+  background:#e0e0e0;
   color:#555;
 }
 
+/* GALERÍA */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:18px;
-  margin:35px 0;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin:40px 0;
 }
 
 .gallery img{
   width:100%;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,.18);
+  border-radius:22px;
+  box-shadow:0 20px 40px rgba(0,0,0,.18);
 }
 
-.confetti{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-}
-
+/* EFECTOS */
 audio{display:none}
 
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:18px;
-  color:rgba(255,117,143,.8);
-  animation:float 8s linear infinite;
+  font-size:20px;
+  color:rgba(255,117,143,.75);
+  animation:float 9s linear infinite;
+  z-index:1;
 }
 
 @keyframes float{
-  to{transform:translateY(-110vh);opacity:0}
+  to{transform:translateY(-120vh);opacity:0}
 }
 
-@media(max-width:600px){
-  h1{font-size:2.3rem}
-  h2{font-size:2rem}
+/* LUCES */
+.lights{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  box-shadow:inset 0 0 220px rgba(255,183,197,.85);
+  opacity:0;
+  transition:opacity 2s ease;
+  z-index:0;
+}
+
+.lights.active{opacity:1}
+
+.confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:10;
+}
+
+@media(max-width:700px){
+  h1{font-size:2.4rem}
+  h2{font-size:2.1rem}
+  p{font-size:1.1rem}
 }
 </style>
 </head>
 
 <body>
 
+<div class="lights" id="lights"></div>
+
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PANTALLA 1 -->
+<!-- ESCENA 1 -->
 <div class="screen active" id="s1">
   <div class="container">
     <h1>Hola Esperanza 💖</h1>
     <p>
-      Quería encontrar una forma especial de decirte algo.<br>
-      Algo que no se resume en palabras simples.<br><br>
-      Así que hice esto… solo para ti.
+      Esto no es solo una página.<br>
+      Es algo que pensé con cariño,<br>
+      con nervios,<br>
+      y con mucho amor.
     </p>
     <button class="next" onclick="go(2)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA 2 -->
+<!-- ESCENA 2 -->
 <div class="screen" id="s2">
   <div class="container">
-    <h2>Desde hace tiempo…</h2>
     <p>
-      Hay sentimientos que no llegan de golpe,<br>
-      llegan despacio,<br>
-      se instalan sin pedir permiso,<br>
-      y cuando te das cuenta… ya son parte de ti.
+      Hay sentimientos que no llegan de golpe.<br>
+      Llegan despacio.<br>
+      Se quedan.<br>
+      Y cuando te das cuenta…<br>
+      ya son parte de tu vida.
     </p>
-    <button class="next" onclick="go(3)">Sigue leyendo</button>
+    <button class="next" onclick="go(3)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA 3 -->
+<!-- ESCENA 3 -->
 <div class="screen" id="s3">
   <div class="container">
-    <h2>La verdad</h2>
     <p>
-      La verdad es que me enamoré de ti.<br><br>
-      De tu risa,<br>
-      de tu forma de mirar la vida,<br>
-      de cómo haces sentir bien a quienes te rodean,<br>
-      y de cómo, sin darte cuenta,<br>
-      te volviste indispensable para mí.
+      Me enamoré de ti sin hacer ruido.<br>
+      De tu forma de ser,<br>
+      de tu manera de cuidar,<br>
+      de cómo haces sentir hogar.
     </p>
-    <button class="next" onclick="go(4)">Quiero saber más</button>
+    <button class="next" onclick="go(4)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA 4 -->
+<!-- ESCENA 4 -->
 <div class="screen" id="s4">
   <div class="container">
-    <h2>Lo que siento por ti</h2>
     <p>
-      Contigo entendí que el amor no es ruido,<br>
-      es calma.<br>
-      Es sentir que estás en el lugar correcto.<br><br>
-      Eres ese lugar donde quiero quedarme,<br>
-      donde quiero construir,
-      donde quiero volver siempre.
+      Contigo entendí que el amor no es presión.<br>
+      Es calma.<br>
+      Es elegir quedarse.<br>
+      Es querer construir.
     </p>
-    <button class="next" onclick="go(5)">Nuestros momentos</button>
+    <button class="next" onclick="go(5)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA 5 -->
+<!-- ESCENA 5 -->
 <div class="screen" id="s5">
   <div class="container">
-    <h2>Momentos que guardo</h2>
-
     <div class="gallery">
       <img src="imagen1.jpg">
       <img src="imagen2.jpg">
       <img src="imagen3.jpg">
       <img src="imagen4.jpg">
       <img src="imagen5.jpg">
+      <img src="imagen6.jpg">
     </div>
-
-    <p>
-      Cada recuerdo contigo<br>
-      confirma lo que siento.<br>
-      Y lo que quiero seguir construyendo.
-    </p>
-
-    <button class="next" onclick="go(6)">Promesas</button>
+    <button class="next" onclick="go(6)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA 6 -->
+<!-- ESCENA 6 -->
 <div class="screen" id="s6">
   <div class="container">
-    <h2>Lo que prometo</h2>
     <p>
       No te prometo perfección.<br>
-      Te prometo amor honesto.<br><br>
-      Elegirte incluso en los días cansados.<br>
-      Escucharte, cuidarte, apoyarte.<br>
-      Caminar a tu lado, siempre.
+      Te prometo amor honesto.<br>
+      Presencia.<br>
+      Y ganas de caminar contigo.
     </p>
-    <button class="next" onclick="go(7)">Hay algo más</button>
+    <button class="next" onclick="go(7)">Continuar</button>
   </div>
 </div>
 
-<!-- PANTALLA FINAL -->
+<!-- ESCENA FINAL -->
 <div class="screen" id="s7">
   <div class="container">
     <h2>Esperanza Mejías…</h2>
     <h2>¿Quieres ser mi polola?</h2>
 
-    <div style="margin-top:30px">
+    <div style="margin-top:50px">
       <button class="yes" onclick="sayYes()">Sí 💖</button>
       <button class="no" id="noBtn" onclick="sayNo()">No</button>
     </div>
 
-    <div id="yesResult" style="display:none;margin-top:40px">
+    <div id="yesResult" style="display:none;margin-top:50px">
       <h2>📖 Capítulo 1</h2>
       <p>
         Dos personas que se eligieron.<br>
-        Un amor que comienza con verdad.<br><br>
-        Y una historia que quiero escribir contigo.
+        Y una historia que recién comienza.
       </p>
       <p><em>Ignacio & Esperanza 💖</em></p>
     </div>
 
-    <div id="noResult" style="display:none;margin-top:40px">
-      <p>
-        Igual gracias por todo lo que eres.<br>
-        Siempre te voy a querer.
-      </p>
+    <div id="noResult" style="display:none;margin-top:50px">
+      <p>Igual siempre te voy a querer.</p>
     </div>
   </div>
 </div>
@@ -261,19 +271,20 @@ setInterval(()=>{
   h.innerHTML="❤";
   h.style.left=Math.random()*100+"vw";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
+  setTimeout(()=>h.remove(),9000);
 },700);
 
 const noBtn=document.getElementById("noBtn");
 noBtn.addEventListener("mouseover",()=>{
   noBtn.style.position="fixed";
-  noBtn.style.left=Math.random()*(innerWidth-100)+"px";
-  noBtn.style.top=Math.random()*(innerHeight-50)+"px";
+  noBtn.style.left=Math.random()*(innerWidth-120)+"px";
+  noBtn.style.top=Math.random()*(innerHeight-60)+"px";
 });
 
 function sayYes(){
   document.getElementById("musica").play();
   document.getElementById("yesResult").style.display="block";
+  document.getElementById("lights").classList.add("active");
   launchConfetti();
 }
 
@@ -285,24 +296,8 @@ function launchConfetti(){
   const c=document.getElementById("confetti");
   const ctx=c.getContext("2d");
   c.width=innerWidth;c.height=innerHeight;
-  let p=[...Array(150)].map(()=>({
+  let p=[...Array(180)].map(()=>({
     x:Math.random()*c.width,
     y:Math.random()*c.height-c.height,
     s:Math.random()*6+4,
-    v:Math.random()*3+2
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    p.forEach(o=>{
-      o.y+=o.v;
-      ctx.fillStyle="rgba(255,117,143,.8)";
-      ctx.fillRect(o.x,o.y,o.s,o.s);
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-}
-</script>
-
-</body>
-</html>
+    v:Mat
