@@ -1,361 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ignacio & Esperanza</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esperanza 💗</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: linear-gradient(135deg, #ffd6e8, #f3c6ff);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #4a2c3a;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #fde2e4, #fff);
-      color: #4a2c2a;
-      overflow-x: hidden;
-    }
+/* Animaciones */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
 
-    section {
-      min-height: 100vh;
-      padding: 60px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+@keyframes float {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-15px);}
+  100% {transform: translateY(0);}
+}
 
-    .container {
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-    }
+@keyframes rain {
+  from {top:-10%;}
+  to {top:110%;}
+}
 
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-    }
+/* Contenedor principal */
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
 
-    /* HERO */
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease;
-    }
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
 
-    .hero p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      animation: fadeIn 3s ease;
-    }
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
 
-    /* SEPARADOR */
-    .separator {
-      width: 120px;
-      height: 2px;
-      background: #e5989b;
-      margin: 40px auto;
-    }
+/* Monitos */
+.monito {
+  width: 140px;
+  position: absolute;
+  animation: float 4s ease-in-out infinite;
+}
 
-    /* STORY */
-    .story p {
-      margin-bottom: 25px;
-      font-size: 1.05rem;
-      line-height: 1.9;
-    }
+.monito.left {
+  left: 10px;
+  top: 120px;
+}
 
-    /* GALERÍA */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
+.monito.right {
+  right: 10px;
+  bottom: 120px;
+}
 
-    .gallery img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
+/* Botones */
+.buttons {
+  margin-top: 40px;
+}
 
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    }
+button {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
 
-    /* PREGUNTA */
-    .question h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-    }
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
 
-    .buttons {
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+.yes {
+  background: #ff5fa2;
+  color: white;
+}
 
-    button {
-      padding: 15px 40px;
-      border-radius: 40px;
-      font-size: 1.2rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+.no {
+  background: #aaa;
+  color: white;
+}
 
-    .yes {
-      background: linear-gradient(135deg, #ff758f, #ffb3c6);
-      color: white;
-      box-shadow: 0 10px 25px rgba(255,117,143,0.5);
-    }
+/* Pantalla final */
+#final {
+  display: none;
+  min-height: 100vh;
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
 
-    .yes:hover { transform: scale(1.1); }
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: pink;
+  animation: float 3s infinite;
+}
 
-    .no {
-      background: #ddd;
-      color: #555;
-    }
+/* Triste */
+.sad {
+  background: linear-gradient(135deg, #666, #222);
+  color: #eee;
+}
 
-    .no:hover { background: #bbb; }
-
-    /* RESULTADOS */
-    .result {
-      display: none;
-      animation: fadeIn 1.5s ease;
-    }
-
-    /* CONFETTI */
-    .confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2.2rem; }
-      .question h2 { font-size: 2rem; }
-    }
-  /* CORAZONES FLOTANDO */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 20px;
-      color: rgba(255,117,143,0.8);
-      animation: floatUp 8s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
-
-    /* TRANSICIÓN TIPO LIBRO */
-    section {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: pageIn 1.5s ease forwards;
-    }
-
-    @keyframes pageIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    audio { display: none; }
-
-  </style>
+.drop {
+  position: fixed;
+  width: 2px;
+  height: 20px;
+  background: #ccc;
+  animation: rain 2s linear infinite;
+}
+</style>
 </head>
+
 <body>
 
-<audio autoplay loop>
-  <source src="musica.mp3" type="audio/mpeg">
-</audio>
+<img src="conejito1.png" class="monito left">
+<img src="conejito2.png" class="monito right">
 
-<section class="hero">
-  <div class="container">
-    <h1>Ignacio & Esperanza</h1>
-    <p>
-      Hay personas que llegan a tu vida sin hacer ruido,
-      y aun así lo cambian todo.
-      Tú eres esa persona.
-    </p>
-    <p>
-      No porque lo intentara,
-      no porque lo buscara,
-      sino porque simplemente… pasó.
-    </p>
+<div class="container" id="main">
+  <h1>Esperanza Mejías 💗</h1>
+
+  <p>
+    No sé en qué momento dejé de verte solo como mi mejor amiga  
+    y empecé a imaginar mi vida completa contigo.
+  </p>
+
+  <p>
+    Prometo cuidarte, elegirte cada día,
+    acompañarte en lo bueno y en lo difícil,
+    y nunca soltarte la mano.
+  </p>
+
+  <p>
+    No te prometo perfección,  
+    pero sí amor sincero, risas,
+    apoyo y un hogar donde siempre puedas volver.
+  </p>
+
+  <h2>¿Quieres ser mi polola?</h2>
+
+  <div class="buttons">
+    <button class="yes" onclick="sayYes()">Sí 💖</button>
+    <button class="no" onclick="sayNo()">No 😔</button>
   </div>
-</section>
+</div>
 
-<section class="story">
-  <div class="container">
-    <div class="separator"></div>
-
-    <p>
-      Con el tiempo entendí que no eras solo alguien importante.
-      Eras el lugar donde quiero quedarme.
-      Donde las risas se sienten hogar
-      y el silencio nunca incomoda.
-    </p>
-
-    <p>
-      Me enamoré de tu forma de ser,
-      de cómo cuidas a quienes amas,
-      de tu manera de ver la vida,
-      y de cómo, sin darte cuenta,
-      te volviste parte de todos mis planes.
-    </p>
-
-    <p>
-      No te prometo perfección,
-      pero sí presencia.
-      No te prometo días fáciles,
-      pero sí una mano firme que no se suelta.
-    </p>
-
-    <p>
-      Prometo elegirte incluso en los días cansados,
-      escucharte cuando más lo necesites,
-      apoyarte en tus sueños
-      y celebrar cada pequeño logro contigo.
-    </p>
-
-    <p>
-      Prometo cuidarte,
-      respetarte,
-      y amarte de una forma honesta,
-      de esas que no se gritan,
-      pero se sienten todos los días.
-    </p>
-
-    <div class="gallery">
-      <img src="imagen5.jpg">
-      <img src="imagen4.jpg">
-      <img src="imagen3.jpg">
-      <img src="imagen2.jpg">
-      <img src="imagen1.jpg">
-    </div>
-  </div>
-</section>
-
-<section class="question" style="opacity:0; transition:opacity 2s ease;" id="questionSection">
-  <div class="container">
-    <div class="separator"></div>
-    <h2>Esperanza Mejías… ¿quieres ser mi polola?</h2>
-    <div class="buttons">
-      <button class="yes" onclick="sayYes()">Sí 💖</button>
-      <button class="no" onclick="sayNo()">No</button>
-    </div>
-
-    <div id="yesResult" class="result">
-      <h2>✨ Este es nuestro comienzo ✨</h2>
-      <p>
-        Gracias por confiar en mí.
-        Prometo caminar a tu lado,
-        cuidarte cuando estés fuerte
-        y abrazarte cuando no lo estés.
-      </p>
-      <p>
-        Prometo reír contigo,
-        aprender contigo,
-        y construir una historia donde ambos
-        nos sintamos amados y en casa.
-      </p>
-      <p>
-        Desde hoy,
-        te elijo a ti.
-        Y ojalá,
-        todos los días que vengan.
-      </p>
-    </div>
-
-    <div id="noResult" class="result">
-      <h2>💔</h2>
-      <p>
-        Igual gracias por haber sido una parte tan hermosa de mi vida.
-        Siempre te voy a querer.
-      </p>
-    </div>
-  </div>
-</section>
-
-<canvas class="confetti" id="confetti"></canvas>
+<div id="final"></div>
 
 <script>
-  // mostrar pregunta al bajar
-  window.addEventListener('scroll', () => {
-    const q = document.getElementById('questionSection');
-    const rect = q.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      q.style.opacity = '1';
-    }
-  });
+function sayYes() {
+  document.getElementById("main").style.display = "none";
+  const final = document.getElementById("final");
+  final.style.display = "block";
+  final.innerHTML = `
+    <h1>💗 Gracias por decir que sí 💗</h1>
+    <p>
+      Prometo amarte con hechos,
+      cuidarte con el alma
+      y caminar contigo todos los días que la vida nos regale.
+    </p>
+    <p>
+      Te quiero hoy, mañana
+      y siempre.
+    </p>
+  `;
 
-  // luz suave celebración
-  function glowEffect() {
-    document.body.style.boxShadow = 'inset 0 0 200px rgba(255,183,197,0.8)';
-    setTimeout(() => document.body.style.boxShadow = 'none', 3000);
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.top = Math.random()*100 + "vh";
+    c.style.background = ["#ff5fa2","#ffd700","#c77dff"][Math.floor(Math.random()*3)];
+    document.body.appendChild(c);
   }
-  // corazones flotando
-  setInterval(() => {
-    const heart = document.createElement('div');
-    heart.className = 'heart';
-    heart.innerHTML = '❤';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 8000);
-  }, 600);
-</script>
+}
 
-<script>
-  function sayYes() {
-    document.getElementById('yesResult').style.display = 'block';
-    document.getElementById('noResult').style.display = 'none';
-    launchConfetti(); glowEffect();
+function sayNo() {
+  document.body.classList.add("sad");
+  document.getElementById("main").style.display = "none";
+  const final = document.getElementById("final");
+  final.style.display = "block";
+  final.innerHTML = `
+    <h1>😔</h1>
+    <p>
+      Igual gracias por llegar hasta aquí.
+      A veces el amor duele,
+      pero siempre vale la pena sentir.
+    </p>
+  `;
+
+  for (let i = 0; i < 60; i++) {
+    const d = document.createElement("div");
+    d.className = "drop";
+    d.style.left = Math.random()*100 + "vw";
+    d.style.animationDuration = (1 + Math.random()*2) + "s";
+    document.body.appendChild(d);
   }
-
-  function sayNo() {
-    document.getElementById('noResult').style.display = 'block';
-    document.getElementById('yesResult').style.display = 'none';
-  }
-
-  function launchConfetti() {
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let pieces = Array.from({ length: 150 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      size: Math.random() * 6 + 4,
-      speed: Math.random() * 3 + 2
-    }));
-
-    function update() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      pieces.forEach(p => {
-        p.y += p.speed;
-        ctx.fillStyle = 'rgba(255,117,143,0.8)';
-        ctx.fillRect(p.x, p.y, p.size, p.size);
-      });
-      requestAnimationFrame(update);
-    }
-    update();
-  }
+}
 </script>
 
 </body>
