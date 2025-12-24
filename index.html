@@ -187,10 +187,14 @@
   <div class="container">
     <h1>Ignacio & Esperanza</h1>
     <p>
-      Desde la pandemia, cuando el mundo estaba detenido,
-      tú apareciste como un lugar seguro.
-      Mi mejor amiga, mi risa diaria,
-      y sin darme cuenta… el amor de mi vida.
+      Hay personas que llegan a tu vida sin hacer ruido,
+      y aun así lo cambian todo.
+      Tú eres esa persona.
+    </p>
+    <p>
+      No porque lo intentara,
+      no porque lo buscara,
+      sino porque simplemente… pasó.
     </p>
   </div>
 </section>
@@ -198,20 +202,42 @@
 <section class="story">
   <div class="container">
     <div class="separator"></div>
+
     <p>
-      Pasaron los días, los años, las conversaciones infinitas,
-      y mi corazón siempre supo algo que recién hoy me atrevo a decir.
+      Con el tiempo entendí que no eras solo alguien importante.
+      Eras el lugar donde quiero quedarme.
+      Donde las risas se sienten hogar
+      y el silencio nunca incomoda.
     </p>
+
     <p>
-      No fue rápido, no fue forzado.
-      Fue real, fue profundo,
-      fue creciendo contigo.
+      Me enamoré de tu forma de ser,
+      de cómo cuidas a quienes amas,
+      de tu manera de ver la vida,
+      y de cómo, sin darte cuenta,
+      te volviste parte de todos mis planes.
     </p>
+
     <p>
-      Hoy no te hablo solo como tu mejor amigo,
-      te hablo como alguien que quiere caminar contigo,
-      cuidarte, elegirte todos los días
-      y construir una vida juntos.
+      No te prometo perfección,
+      pero sí presencia.
+      No te prometo días fáciles,
+      pero sí una mano firme que no se suelta.
+    </p>
+
+    <p>
+      Prometo elegirte incluso en los días cansados,
+      escucharte cuando más lo necesites,
+      apoyarte en tus sueños
+      y celebrar cada pequeño logro contigo.
+    </p>
+
+    <p>
+      Prometo cuidarte,
+      respetarte,
+      y amarte de una forma honesta,
+      de esas que no se gritan,
+      pero se sienten todos los días.
     </p>
 
     <div class="gallery">
@@ -225,22 +251,34 @@
   </div>
 </section>
 
-<section class="question">
+<section class="question" style="opacity:0; transition:opacity 2s ease;" id="questionSection">
   <div class="container">
     <div class="separator"></div>
-    <h2>Esperanza… ¿quieres ser mi polola?</h2>
+    <h2>Esperanza Mejías… ¿quieres ser mi polola?</h2>
     <div class="buttons">
       <button class="yes" onclick="sayYes()">Sí 💖</button>
       <button class="no" onclick="sayNo()">No</button>
     </div>
 
     <div id="yesResult" class="result">
-      <h2>✨ Gracias por elegirnos ✨</h2>
+      <h2>✨ Este es nuestro comienzo ✨</h2>
       <p>
-        Prometo amarte con paciencia,
-        reír contigo,
-        cuidarte incluso en los días difíciles
-        y elegirte hoy, mañana y siempre.
+        Gracias por confiar en mí.
+        Prometo caminar a tu lado,
+        cuidarte cuando estés fuerte
+        y abrazarte cuando no lo estés.
+      </p>
+      <p>
+        Prometo reír contigo,
+        aprender contigo,
+        y construir una historia donde ambos
+        nos sintamos amados y en casa.
+      </p>
+      <p>
+        Desde hoy,
+        te elijo a ti.
+        Y ojalá,
+        todos los días que vengan.
       </p>
     </div>
 
@@ -257,6 +295,20 @@
 <canvas class="confetti" id="confetti"></canvas>
 
 <script>
+  // mostrar pregunta al bajar
+  window.addEventListener('scroll', () => {
+    const q = document.getElementById('questionSection');
+    const rect = q.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      q.style.opacity = '1';
+    }
+  });
+
+  // luz suave celebración
+  function glowEffect() {
+    document.body.style.boxShadow = 'inset 0 0 200px rgba(255,183,197,0.8)';
+    setTimeout(() => document.body.style.boxShadow = 'none', 3000);
+  }
   // corazones flotando
   setInterval(() => {
     const heart = document.createElement('div');
@@ -273,7 +325,7 @@
   function sayYes() {
     document.getElementById('yesResult').style.display = 'block';
     document.getElementById('noResult').style.display = 'none';
-    launchConfetti();
+    launchConfetti(); glowEffect();
   }
 
   function sayNo() {
