@@ -5,241 +5,298 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ignacio & Esperanza</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(180deg,#f8cdda,#fce4ec);
+  background:linear-gradient(180deg,#fde2e4,#fff);
   color:#4a2c2a;
-  overflow:hidden;
 }
 
+/* SECCIONES */
 section{
-  position:absolute;
-  width:100%;
-  height:100vh;
+  min-height:100vh;
+  padding:110px 8vw;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:40px;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 1s ease;
 }
 
-section.active{
-  opacity:1;
-  pointer-events:auto;
+.container{
+  max-width:1000px;
+  width:100%;
+  text-align:center;
 }
 
 h1,h2{
   font-family:'Playfair Display',serif;
-  text-align:center;
 }
 
-h1{font-size:3rem;margin-bottom:20px}
-h2{font-size:2.2rem;margin-bottom:15px}
+h1{font-size:3.2rem;margin-bottom:30px}
+h2{font-size:2.5rem;margin-bottom:35px}
 
 p{
-  max-width:800px;
-  text-align:center;
   font-size:1.15rem;
-  line-height:1.8;
-  margin-bottom:30px;
+  line-height:2;
+  margin-bottom:40px;
 }
 
+/* BOTONES */
 button{
-  padding:14px 35px;
+  padding:15px 45px;
   border:none;
-  border-radius:40px;
-  background:#e91e63;
-  color:white;
+  border-radius:50px;
   font-size:1.1rem;
   cursor:pointer;
-  transition:all .3s;
-  margin:10px;
+  transition:.4s;
 }
 
-button:hover{
-  transform:scale(1.08);
-  box-shadow:0 10px 25px rgba(0,0,0,.2);
+.primary{
+  background:linear-gradient(135deg,#ff758f,#ffb3c6);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(255,117,143,.5);
 }
 
+.primary:hover{transform:scale(1.1)}
+
+.secondary{
+  background:#ddd;
+  color:#555;
+}
+
+/* GALERÍA */
 .gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:20px;
-  width:100%;
-  max-width:900px;
-  margin-top:30px;
+  gap:25px;
+  margin-top:40px;
 }
 
 .gallery img{
   width:100%;
   border-radius:20px;
-  box-shadow:0 10px 20px rgba(0,0,0,.25);
-  transition:transform .4s;
+  box-shadow:0 15px 30px rgba(0,0,0,.2);
+  transition:.4s;
 }
 
 .gallery img:hover{transform:scale(1.05)}
 
+/* LUCES */
+.lights{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,182,193,.35), transparent 40%),
+    radial-gradient(circle at 80% 40%, rgba(255,105,180,.35), transparent 45%),
+    radial-gradient(circle at 50% 70%, rgba(255,192,203,.3), transparent 50%);
+  animation:lights 2.5s infinite alternate;
+  display:none;
+}
+
+@keyframes lights{
+  from{opacity:.3}
+  to{opacity:.9}
+}
+
+/* CONFETI */
 .confetti{
   position:fixed;
-  width:10px;
-  height:10px;
-  background:red;
-  animation:fall 3s linear infinite;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  animation:fall 2.8s linear forwards;
 }
 
 @keyframes fall{
-  0%{transform:translateY(-100px) rotate(0deg)}
-  100%{transform:translateY(100vh) rotate(360deg)}
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
-.glow{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at center,rgba(255,255,255,.25),transparent 60%);
-  animation:pulse 2s infinite;
-}
+/* BOTÓN NO */
+#noBtn{position:relative}
 
-@keyframes pulse{
-  0%,100%{opacity:.3}
-  50%{opacity:.6}
-}
-
-.noBtn{
-  position:relative;
+/* MOBILE */
+@media(max-width:600px){
+  h1{font-size:2.4rem}
+  h2{font-size:2rem}
+  section{padding:80px 6vw}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="musica" loop>
-  <source src="standing-next-to-you.mp3" type="audio/mpeg">
+<div class="lights" id="lights"></div>
+
+<!-- AUDIO -->
+<audio id="lofi" autoplay loop volume="0.25">
+  <source src="lofi.mp3" type="audio/mpeg">
 </audio>
 
-<!-- BIENVENIDA -->
-<section class="active">
-  <h1>Ignacio & Esperanza</h1>
-  <p>
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ESCENAS -->
+<section>
+  <div class="container">
+    <h1>Ignacio & Esperanza</h1>
+    <p>
       Quería encontrar una forma especial de decirte algo.<br>
       Algo que no se resume en palabras simples.<br><br>
       Así que hice esto… solo para ti.
-  </p>
-  <button onclick="next()">Entrar</button>
-</section>
-
-<!-- HISTORIA -->
-<section>
-  <h2>Quiero decirte algo</h2>
-  <p>
-    No fue algo rápido.<br>
-    Fue mirarte, conocerte, quererte sin darme cuenta.<br><br>
-    Hoy no imagino mis días sin ti,<br>
-    ni mis planes sin tu risa al lado.
-  </p>
-  <button onclick="next()">Siguiente</button>
-</section>
-
-<!-- PROMESAS -->
-<section>
-  <h2>Mis promesas</h2>
-  <p>
-    Prometo cuidarte cuando estés cansada.<br>
-    Elegirte incluso en los días difíciles.<br>
-    Quererte en lo simple y en lo eterno.<br><br>
-    Quiero una vida contigo, Esperanza Mejías.
-  </p>
-  <button onclick="next()">Ver recuerdos</button>
-</section>
-
-<!-- FOTOS -->
-<section>
-  <h2>Nosotros</h2>
-  <div class="gallery">
-    <img src="imagen1.jpg">
-    <img src="imagen2.jpg">
-    <img src="imagen3.jpg">
-    <img src="imagen4.jpg">
-    <img src="imagen5.jpg">
-    <img src="imagen6.jpg">
-  </div>
-  <button onclick="next()">Una pregunta…</button>
-</section>
-
-<!-- PREGUNTA -->
-<section>
-  <h2>Esperanza</h2>
-  <p>
-    Con todo lo que siento,<br>
-    con todo lo que soy…<br><br>
-    ¿Quieres ser mi polola?
-  </p>
-  <div>
-    <button onclick="sayYes()">Sí 💖</button>
-    <button class="noBtn" id="noBtn">No</button>
+    </p>
+    <button class="primary" onclick="next()">Entrar</button>
   </div>
 </section>
 
-<!-- SI -->
-<section id="yes">
-  <div class="glow"></div>
-  <h2>💖 Ella dijo que sí 💖</h2>
-  <p>
-    Prometo amarte bonito,<br>
-    caminar contigo cada capítulo<br>
-    y hacerte sentir en casa siempre.
-  </p>
+<section style="display:none">
+  <div class="container">
+    <p>
+      No fue algo planeado.<br><br>
+      Simplemente empezaste a estar.<br>
+      En mis días.<br>
+      En mis risas.<br>
+      En mis pensamientos.<br><br>
+      Y sin darme cuenta,<br>
+      te volviste parte de todo lo que soy.
+    </p>
+    <button class="primary" onclick="next()">Continuar</button>
+  </div>
 </section>
 
-<!-- CAPITULO 1 -->
-<section id="chapter">
-  <h2>📖 Capítulo 1</h2>
-  <p>
-    Dos personas que se eligieron.<br>
-    Una historia que recién comienza.<br><br>
-    Ignacio & Esperanza 💕
-  </p>
+<section style="display:none">
+  <div class="container">
+    <p>
+      Contigo entendí que el amor no siempre llega haciendo ruido.<br><br>
+      A veces llega en calma.<br>
+      En confianza.<br>
+      En sentirse en casa con alguien.<br><br>
+      Me enamoré de tu forma de ser,<br>
+      de tu corazón,<br>
+      y de cómo haces que todo se sienta más bonito<br>
+      solo por estar ahí.
+    </p>
+    <button class="primary" onclick="next()">Siguiente</button>
+  </div>
 </section>
 
-<!-- NO -->
-<section id="no">
-  <h2>💔</h2>
-  <p>
-    A veces el amor duele…<br>
-    pero sigue siendo amor.
-  </p>
+<section style="display:none">
+  <div class="container">
+    <p>
+      No te prometo perfección.<br><br>
+      Pero sí presencia.<br><br>
+      Prometo elegirte incluso en los días cansados.<br>
+      Escucharte cuando no sepas qué decir.<br>
+      Cuidarte cuando el mundo pese.<br><br>
+      Prometo caminar a tu lado,<br>
+      no delante ni detrás,<br>
+      sino contigo.
+    </p>
+    <button class="primary" onclick="next()">Nuestros recuerdos</button>
+  </div>
+</section>
+
+<section style="display:none">
+  <div class="container">
+    <p>
+      Estos somos nosotros.<br><br>
+      Momentos simples.<br>
+      Risas reales.<br>
+      Instantes que no se repiten,<br>
+      pero que guardo para siempre.
+    </p>
+
+    <div class="gallery">
+      <img src="imagen1.jpg">
+      <img src="imagen2.jpg">
+      <img src="imagen3.jpg">
+      <img src="imagen4.jpg">
+      <img src="imagen5.jpg">
+    </div>
+
+    <button class="primary" onclick="next()" style="margin-top:50px">
+      Una última cosa…
+    </button>
+  </div>
+</section>
+
+<section style="display:none">
+  <div class="container">
+    <h2>Esperanza Mejías</h2>
+    <p>
+      Con todo lo que soy<br>
+      y todo lo que siento…<br><br>
+      ¿Quieres ser mi polola?
+    </p>
+
+    <button class="primary" onclick="sayYes()">Sí 💖</button>
+    <button class="secondary" id="noBtn">No</button>
+
+    <div id="yesResult" style="display:none">
+      <h2>💖 Ella dijo que sí 💖</h2>
+      <p>
+        Prometo amarte bonito,<br>
+        y caminar contigo cada capítulo.
+      </p>
+    </div>
+
+    <div id="chapter" style="display:none">
+      <h2>📖 Capítulo 1</h2>
+      <p>
+        Dos personas que se eligieron.<br><br>
+        Ignacio & Esperanza<br><br>
+        Y una historia que recién comienza.
+      </p>
+    </div>
+  </div>
 </section>
 
 <script>
-let current=0;
 const sections=document.querySelectorAll("section");
+let current=0;
 
 function next(){
-  sections[current].classList.remove("active");
+  sections[current].style.display="none";
   current++;
-  sections[current].classList.add("active");
+  sections[current].style.display="flex";
 }
 
-function sayYes(){
-  document.getElementById("musica").play();
-  launchConfetti();
-  sections[current].classList.remove("active");
-  document.getElementById("yes").classList.add("active");
-  setTimeout(()=>{
-    document.getElementById("yes").classList.remove("active");
-    document.getElementById("chapter").classList.add("active");
-  },4000);
+/* FUNDIDO + VOLUMEN DINÁMICO */
+function crossfade(lofi, main){
+  let fade=0;
+  main.volume=0;
+  main.play();
+
+  const interval=setInterval(()=>{
+    fade+=0.02;
+    lofi.volume=Math.max(0,0.25-fade);
+    main.volume=Math.min(1,fade);
+    if(fade>=1){
+      lofi.pause();
+      clearInterval(interval);
+    }
+  },100);
 }
 
-function launchConfetti(){
-  for(let i=0;i<80;i++){
+/* CONFETI CON BEAT */
+function confettiBeat(){
+  const bpm=130;
+  const interval=60000/bpm;
+
+  let count=0;
+  const timer=setInterval(()=>{
+    confettiBurst();
+    count++;
+    if(count>16) clearInterval(timer);
+  },interval);
+}
+
+function confettiBurst(){
+  for(let i=0;i<20;i++){
     const c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*100+"vw";
@@ -249,6 +306,22 @@ function launchConfetti(){
   }
 }
 
+function sayYes(){
+  const lofi=document.getElementById("lofi");
+  const musica=document.getElementById("musica");
+
+  crossfade(lofi,musica);
+  document.getElementById("lights").style.display="block";
+  confettiBeat();
+
+  document.getElementById("yesResult").style.display="block";
+
+  setTimeout(()=>{
+    document.getElementById("chapter").style.display="block";
+  },3500);
+}
+
+/* BOTÓN NO ESCAPA */
 const noBtn=document.getElementById("noBtn");
 noBtn.addEventListener("mouseover",()=>{
   noBtn.style.position="fixed";
